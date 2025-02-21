@@ -1,7 +1,6 @@
 #include "includes.h"
 
-uint16_t Cnt;
-
+#define PRINT(window, fmt, args...) printf("{" #window "}" fmt "\n", ##args)
 int main(void)
 {
     SYSCFG_DL_init();
@@ -9,7 +8,6 @@ int main(void)
     timer_init();
     IIC_init();
     INA228_init();
-    uart0_printf("start\n");
     while (1)
     {
         while (isTimer0Zero == false)
@@ -17,13 +15,7 @@ int main(void)
             __WFI();
         }
         isTimer0Zero = false;
-        // while (timer20ms_int == false)
-        // {
-        //     __WFI();
-        // }
-        // timer20ms_int = false;
-        uint16_t vbus = (uint16_t)INA228_Get_VBUS();
-        uint16_t current = (uint16_t)INA228_Get_CURRENT();
-        uartSendData(vbus, current, 0, 0, 0, 0);
+        float v = INA228_Get_VBUS(), i = INA228_Get_CURRENT();
+        PRINT(plotter, "%f,%f", v, i);
     }
 }

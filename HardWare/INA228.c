@@ -57,7 +57,7 @@ float INA228_Get_VBUS(void)
 	INA228_Read_Mem(INA228_VBUS, 3, data1);
 	uint32_t data = (data1[0] << 16 | data1[1] << 8 | data1[2]) >> 4;
 	VBUS = 0.0001953125 * data;
-	return VBUS * 10000;
+	return VBUS;
 }
 
 // 获取芯片温度
@@ -86,7 +86,7 @@ float INA228_Get_CURRENT(void)
 	}
 
 	CURRENT = data * CURRENT_LSB;
-	return CURRENT * 1000 * 1000 * 10;
+	return CURRENT * 1000;
 }
 
 // 获取功率
@@ -144,7 +144,7 @@ void INA228_init(void)
 {
 	// 初始化INA228配置
 	INA228_MainConfig.ADCRANGE = 1;
-	INA228_MainConfig.MEC = 0.2;
+	INA228_MainConfig.MEC = 0.04096;
 	INA228_MainConfig.TEMPCOMP = 1;
 	INA228_MainConfig.RST = 0;
 	INA228_MainConfig.RSTACC = 1;
@@ -178,5 +178,5 @@ void INA228_init(void)
 	INA228_Write_Mem(INA228_ADC_CONFIG, 2, adc_data1);
 
 	// 设置Rshunt阻值和温漂
-	INA228_SET_SHUNT_CAL(200, 50);
+	INA228_SET_SHUNT_CAL(2000, 25);
 }
