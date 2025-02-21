@@ -2,7 +2,7 @@
   <img width="40%" align="center" src="./images/LPA.png" alt="logo">
 </p>
   <h1 align="center">
-  低功耗分析仪
+  超低功耗分析仪
 </h1>
 
 [硬件开源地址](https://oshwhub.com/txp666/di-gong-hao-fen-xi-yi)
@@ -10,6 +10,7 @@
 使用纸飞机串口助手观察曲线（电压/V,电流/mA）:
 
 ![images](./images/纸飞机.png)
+
 根据自己要测的最大电流，修改分流电阻提高分辨率：
 
 ![images](./images/分流电阻.png)
